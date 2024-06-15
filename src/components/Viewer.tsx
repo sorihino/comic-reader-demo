@@ -27,18 +27,11 @@ const Viewer = ({ breakpointAspectRatio = 5 / 4, pages, title }: Props) => {
   const handler = {
     click: {
       prev: () => {
-        if (currentPage <= 0) {
-          return
-        }
         setCurrentPage(Math.max(currentPage - (isSingleView ? 1 : 2), 0))
       },
       next: () => {
-        if (currentPage >= pages.length - 1) {
-          return
-        }
-
         setCurrentPage(
-          Math.min(currentPage + (isSingleView ? 1 : 2), pages.length),
+          Math.min(currentPage + (isSingleView ? 1 : 2), pages.length - 1),
         )
       },
       center: () => {
