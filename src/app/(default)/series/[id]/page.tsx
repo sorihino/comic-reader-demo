@@ -1,19 +1,28 @@
-import { fetchAllSeries, fetchSeries } from '@/lib/fetchData'
+import type { Metadata } from 'next'
+import { fetchAllSeries, fetchSeries, fetchSeriesTitleById } from '@/lib/fetchData'
 import EpisodeList from '@/components/EpisodeList'
 
 export const dynamicParams = false
 
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   const seriesArray = await fetchAllSeries()
 
   return seriesArray.map((series) => ({ id: series.id }))
 }
 
-export default async function SeriesPage({
+export const generateMetadata = async ({ params }: { params: { id: string }}): Promise<Metadata> => {
+  const title = await fetchSeriesTitleById(params.id)
+
+  return {
+    title: title
+  }
+}
+
+const SeriesPage = async ({
   params,
 }: {
   params: { id: string }
-}) {
+}) => {
   const seriesId = params.id
   const series = await fetchSeries(seriesId)
 
@@ -30,3 +39,5 @@ export default async function SeriesPage({
     </div>
   )
 }
+
+export default SeriesPage

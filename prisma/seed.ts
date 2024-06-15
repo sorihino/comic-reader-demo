@@ -2,7 +2,7 @@ import fs from 'fs'
 import crypto from 'crypto'
 import { v2 as cloudinary } from 'cloudinary'
 import { PrismaClient, Series, Episode, Page } from '@prisma/client'
-import { assets, Asset } from './assets'
+import assets, { Asset } from './assets'
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

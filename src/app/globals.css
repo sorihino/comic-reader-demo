@@ -3,15 +3,18 @@
 @tailwind utilities;
 
 @layer components {
-  p,
-  h1,
-  h2,
-  h3,
-  a {
-    @apply text-stone-700;
-  }
+    p,
+    h1,
+    h2,
+    h3 {
+        @apply text-stone-700;
+    }
 
-  h3 {
-    @apply text-lg font-semibold;
-  }
+    h3 {
+        @apply text-lg font-semibold;
+    }
+
+    a {
+      @apply text-stone-500 hover:text-stone-700;
+    }
 }

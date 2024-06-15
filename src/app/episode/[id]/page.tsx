@@ -1,12 +1,21 @@
+import type { Metadata } from 'next'
 import Viewer from '@/components/Viewer'
-import { fetchEpisode, fetchAllEpisodes } from '@/lib/fetchData'
+import { fetchEpisode, fetchAllEpisodes, fetchEpisodeTitleById } from '@/lib/fetchData'
 
 export const dynamicParams = false
 
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   const seriesArray = await fetchAllEpisodes()
 
   return seriesArray.map((series) => ({ id: series.id }))
+}
+
+export const generateMetadata = async ({ params }: { params: { id: string }}): Promise<Metadata> => {
+  const title = await fetchEpisodeTitleById(params.id)
+
+  return {
+    title: title
+  }
 }
 
 type Props = {

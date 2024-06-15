@@ -1,8 +1,12 @@
 import { Episode, Page } from '@prisma/client'
 import prisma from './db'
 
-export async function fetchAllSeries() {
+export const fetchAllSeries = async () => {
   const seriesArray = await prisma.series.findMany()
+
+  if (seriesArray.length === 0) {
+    throw new Error(`No series record exists on database`)
+  }
 
   return seriesArray
 }
@@ -31,19 +35,19 @@ export const fetchSeries = async (seriesId: string) => {
   })
 
   if (series === null) {
-    throw new Error('somehting sjad')
+    throw new Error(`Matched record(s) not found for series ID: ${seriesId}`)
   }
 
   return series
 }
 
-export async function fetchAllEpisodes() {
+export const fetchAllEpisodes = async () => {
   const episodes = await prisma.episode.findMany()
 
   return episodes
 }
 
-export async function fetchEpisodes(seriesId: string): Promise<Episode[]> {
+export const fetchEpisodes = async (seriesId: string): Promise<Episode[]> => {
   const episodes = await prisma.series.findUnique({
     where: {
       id: seriesId,
@@ -60,9 +64,9 @@ export async function fetchEpisodes(seriesId: string): Promise<Episode[]> {
   return episodes.episodes
 }
 
-export async function fetchEpisode(
+export const fetchEpisode = async (
   episodeId: string,
-): Promise<Episode & { pages: Page[] }> {
+): Promise<Episode & { pages: Page[] }> => {
   const episode = await prisma.episode.findUnique({
     where: {
       id: episodeId,
@@ -81,4 +85,38 @@ export async function fetchEpisode(
   }
 
   return episode
+}
+
+export const fetchSeriesTitleById = async (seriesId: string) => {
+  const data = await prisma.series.findFirst({
+    where: {
+      id: seriesId,
+    },
+    select: {
+      title: true,
+    }
+  })
+
+  if (data === null) {
+    throw new Error(`No matched record found for series ID: ${seriesId}`)
+  }
+
+  return data.title
+}
+
+export const fetchEpisodeTitleById = async (episodeId: string) => {
+  const data = await prisma.episode.findFirst({
+    where: {
+      id: episodeId,
+    },
+    select: {
+      title: true,
+    }
+  })
+
+  if (data === null) {
+    throw new Error(`No matched record found for episode ID: ${episodeId}`)
+  }
+
+  return data.title
 }

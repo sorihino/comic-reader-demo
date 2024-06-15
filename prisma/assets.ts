@@ -55,4 +55,4 @@ for (const seriesDirent of seriesDirents) {
     }
 }
 
-export { assets }
+export default assets

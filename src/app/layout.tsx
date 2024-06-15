@@ -9,16 +9,19 @@ const noto_sans_jp = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: 'Public Domain Comics',
   description: 'Read publick domain comics online',
+  robots: 'noindex',
 }
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode
-}>) {
+}>) => {
   return (
     <html lang='en'>
       <body className={noto_sans_jp.className}>{children}</body>
     </html>
   )
 }
+
+export default RootLayout
