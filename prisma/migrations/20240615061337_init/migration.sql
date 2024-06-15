@@ -13,6 +13,7 @@ CREATE TABLE "Episode" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "seriesId" TEXT NOT NULL,
+    "cover" TEXT NOT NULL,
     "episodeNumber" INTEGER NOT NULL,
 
     CONSTRAINT "Episode_pkey" PRIMARY KEY ("id")
@@ -22,6 +23,9 @@ CREATE TABLE "Episode" (
 CREATE TABLE "Series" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
+    "cover" TEXT NOT NULL,
+    "description" TEXT,
+    "author" TEXT NOT NULL,
 
     CONSTRAINT "Series_pkey" PRIMARY KEY ("id")
 );
@@ -31,4 +35,3 @@ ALTER TABLE "Page" ADD CONSTRAINT "Page_episodeId_fkey" FOREIGN KEY ("episodeId"
 
 -- AddForeignKey
 ALTER TABLE "Episode" ADD CONSTRAINT "Episode_seriesId_fkey" FOREIGN KEY ("seriesId") REFERENCES "Series"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-

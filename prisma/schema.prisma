@@ -8,24 +8,28 @@ datasource db {
 }
 
 model Page {
-  id         String     @id
+  id         String   @id
   url        String
   pageNumber Int
   episodeId  String
-  episode    Episode @relation(fields: [episodeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  episode    Episode  @relation(fields: [episodeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model Episode {
   id            String @id
   title         String
   seriesId      String
+  cover			    String
   episodeNumber Int
   series        Series @relation(fields: [seriesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   pages         Page[]
 }
 
 model Series {
-  id       String    @id
-  title    String
-  episodes Episode[]
+  id          String    @id
+  title       String
+  cover	      String
+  description	String?
+  author      String
+  episodes    Episode[]
 }
