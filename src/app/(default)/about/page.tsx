@@ -17,11 +17,11 @@ const About = () => {
                     より取得したパブリックドメインの漫画データを用いておりますが、著作権に関する問題等ございましたら
                     <a
                         className='underline'
-                        href='mail:dextone.shiba@gmail.com'
+                        href='mailto:dextone.shiba@gmail.com'
                     >
                         E-Mail
                     </a>
-                    にご連絡お願い申し上げます。
+                    にてご連絡の程お願い致します。
                 </p>
             </div>
             <h3>使用技術等</h3>
