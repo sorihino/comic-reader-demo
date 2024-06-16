@@ -61,7 +61,7 @@ const Viewer = ({ breakpointAspectRatio = 5 / 4, pages, title }: Props) => {
   }, [breakpointAspectRatio])
 
   return (
-    <div className='w-full h-screen relative overflow-hidden bg-stone-700 text-stone-100'>
+    <div className='w-full h-full relative overflow-hidden bg-stone-700 text-stone-100'>
       {isMenuVisible && (
         <>
           <div className='w-full text-center z-20 p-2 absolute top-0 opacity-80 bg-stone-500'>
