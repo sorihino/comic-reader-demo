@@ -29,7 +29,7 @@ const EpisodePage = async ({ params }: Props) => {
   const episode = await fetchEpisode(episodeId)
 
   return (
-    <div className='w-screen h-screen'>
+    <div className='w-screen h-dvh'>
       <Viewer {...episode} />
     </div>
   )
